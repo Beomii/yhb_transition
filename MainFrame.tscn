@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://MainFrame.gd" type="Script" id=1]
+[ext_resource path="res://ui_scenes/SceneTransition.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/NanumGothic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://MainframeHUD.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="MainFrame" type="Node"]
+script = ExtResource( 1 )
+
+[node name="scene" type="Node" parent="."]
+
+[node name="SceneTransition" parent="." instance=ExtResource( 2 )]
+
+[node name="MainframeHUD" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 4 )
+
+[node name="FPSLabel" type="Label" parent="MainframeHUD"]
+pause_mode = 2
+margin_right = 69.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.129412, 0.776471, 0.109804, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "mainframe"
+
+[node name="DebugLabel" type="Label" parent="MainframeHUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -264.0
+margin_top = -14.0
+
+[connection signal="transitioned" from="SceneTransition" to="." method="_on_SceneTransition_transitioned"]
